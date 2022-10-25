@@ -19,6 +19,10 @@ export class ToDoService {
     return this.toDos;
   }
 
+  public addToDo(toDo: ToDo) {
+    this.toDos.push(toDo);
+  }
+
   public fetchToDos(): void {
    this.http.get("http://localhost:666/api/todo").subscribe((data: any) => {
     for(let i = 0; i < data.length; i++) {
@@ -27,11 +31,14 @@ export class ToDoService {
    })
   }
 
-  public createToDo(): void {
-    console.log("createToDo() isn't implemented yet");
+  public createToDo(newTaskDescription: String): void {
+      this.http.post('http://localhost:666/api/todo', { taskDescription: newTaskDescription }).subscribe(data => {
+        console.log(data);
+      })
+    this.fetchToDos();
   }
 
-  public updateToDo(): void {
+  public updateToDo(toDo: ToDo): void {
     console.log("updateToDo() isn't implemented yet");
   }
 

@@ -31,6 +31,13 @@ export class ToDoOverviewComponent implements OnInit, AfterViewChecked {
   updateToDo(toDo: ToDo) {
     toDo.setComplete(!toDo.isComplete());
      // implement call to service and in service implement updateToDo to make a put to server and do the thing
+     this.toDoService.updateToDo(toDo);
+  }
+
+  createToDo(event: any) {
+    this.toDoService.createToDo(event.target.taskDescription.value);
+    this.toDoService.addToDo(new ToDo('changeplease', event.target.taskDescription.value, false));
+    this.dataSource.data = this.toDoService.getToDos();
   }
 
 }
