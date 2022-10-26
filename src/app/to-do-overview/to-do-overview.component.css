@@ -1,0 +1,22 @@
+.input {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+ mat-form-field {
+    width: 40%;
+    position: relative;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+table {
+  width: 90%;
+  position: relative;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
