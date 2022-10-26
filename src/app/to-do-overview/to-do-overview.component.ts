@@ -15,7 +15,7 @@ export class ToDoOverviewComponent implements OnInit, AfterViewChecked {
   @ViewChild('toDoInput') toDoInput!: ElementRef;
 
   dataSource: MatTableDataSource<ToDo> = new MatTableDataSource<ToDo>;
-  displayedColumns: String[] = ["complete", "description"];
+  displayedColumns: String[] = ["complete", "description", "delete"];
   toDoService: ToDoService;
 
   constructor(toDoService: ToDoService, http: HttpClient) {
@@ -33,16 +33,20 @@ export class ToDoOverviewComponent implements OnInit, AfterViewChecked {
 
   updateToDo(toDo: ToDo) {
      toDo.setComplete(!toDo.isComplete());
-     // implement call to service and in service implement updateToDo to make a put to server and do the thing
      this.toDoService.updateToDo(toDo);
      this.dataSource.data = this.toDoService.getToDos();
   }
 
   createToDo(event: any) {
     this.toDoService.createToDo(this.toDoInput.nativeElement.value);
-//     this.toDoService.addToDo(new ToDo('changeplease', this.toDoInput.nativeElement.value, false));
+    this.toDoService.addToDo(new ToDo('changeplease', this.toDoInput.nativeElement.value, false));
     this.dataSource.data = this.toDoService.getToDos();
     this.toDoInput.nativeElement.value = "";
+  }
+
+  deleteToDo(todo: ToDo) {
+    this.toDoService.deleteToDo(todo);
+    this.dataSource.data = this.toDoService.getToDos();
   }
 
 }

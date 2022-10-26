@@ -12,6 +12,7 @@ import {MatTableModule} from '@angular/material/table'
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { ToDoService } from './services/to-do.service'
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ToDoService } from './services/to-do.service'
     MatTableModule,
     MatCheckboxModule,
     HttpClientModule,
+    MatButtonModule,
   ],
   providers: [ToDoService,],
   bootstrap: [AppComponent]

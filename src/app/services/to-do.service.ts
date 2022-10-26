@@ -25,6 +25,7 @@ export class ToDoService {
 
   public fetchToDos(): void {
    this.http.get("http://localhost:666/api/todo").subscribe((data: any) => {
+    this.toDos = [];
     for(let i = 0; i < data.length; i++) {
       this.toDos.push(new ToDo(data[i].id, data[i].taskDescription, data[i].isComplete));
     }
@@ -40,22 +41,25 @@ export class ToDoService {
           }
         }
       })
-    this.fetchToDos();
   }
 
   public updateToDo(toDo: ToDo): void {
     let todo1!: ToDo;
     for(let i = 0; i < this.toDos.length; i++) {
       if (this.toDos[i].getId() == toDo.getId()) {
-        this.toDos[i].setComplete(!this.toDos[i].isComplete());
         todo1 = this.toDos[i];
       }
     }
-    this.http.put('http://localhost:666/api/todo/'+todo1.getId(), { isComplete: todo1.isComplete() });
+    this.http.put('http://localhost:666/api/todo/'+todo1.getId(), { isComplete: todo1.isComplete()}).subscribe();
   }
 
-  public deleteToDo(): void {
-    console.log("deleteToDo() isn't implemented yet");
+  public deleteToDo(toDo: ToDo): void {
+    for(let i = 0; i < this.toDos.length; i++) {
+      if (this.toDos[i].getId() == toDo.getId()) {
+        this.toDos.splice(i,1);
+      }
+    }
+    this.http.delete('http://localhost:666/api/todo/'+toDo.getId()).subscribe();
   }
 
 }
