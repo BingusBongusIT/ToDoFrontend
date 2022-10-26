@@ -2,7 +2,7 @@
   <div class="input">
       <mat-form-field appearance="fill">
         <mat-label>Create new task</mat-label>
-        <input matInput (keydown.enter)="this.createToDo($event)" name="taskDescription">
+        <input matInput #toDoInput (keydown.enter)="this.createToDo($event)" name="taskDescription">
       </mat-form-field>
     <table mat-table [dataSource]="dataSource">
 

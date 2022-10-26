@@ -22,6 +22,10 @@ export class ToDo {
     return this.id;
   }
 
+  public setId(id: String) {
+    this.id = id;
+  }
+
   public setComplete(complete: boolean) {
     this.complete = complete;
   }
