@@ -24,7 +24,7 @@ export class ToDoService {
   }
 
   public fetchToDos(): void {
-   this.http.get("http://localhost:666/api/todo").subscribe((data: any) => {
+   this.http.get("http://bingusbongus.azurewebsite.net/api/todo").subscribe((data: any) => {
     this.toDos = [];
     for(let i = 0; i < data.length; i++) {
       this.toDos.push(new ToDo(data[i].id, data[i].taskDescription, data[i].isComplete));
@@ -33,7 +33,7 @@ export class ToDoService {
   }
 
   public createToDo(newTaskDescription: String): void {
-      this.http.post('http://localhost:666/api/todo', { taskDescription: newTaskDescription }).subscribe((data: any) => {
+      this.http.post('http://bingusbongus.azurewebsite.net/api/todo', { taskDescription: newTaskDescription }).subscribe((data: any) => {
         for(let i = 0; i < this.toDos.length; i++) {
           if (this.toDos[i].getId() == "changeplease" && data.taskDescription == this.toDos[i].getTaskDescription()) {
             this.toDos[i].setId(data.id);
@@ -50,7 +50,7 @@ export class ToDoService {
         todo1 = this.toDos[i];
       }
     }
-    this.http.put('http://localhost:666/api/todo/'+todo1.getId(), { isComplete: todo1.isComplete()}).subscribe();
+    this.http.put('http://bingusbongus.azurewebsite.net/api/todo/'+todo1.getId(), { isComplete: todo1.isComplete()}).subscribe();
   }
 
   public deleteToDo(toDo: ToDo): void {
@@ -59,7 +59,7 @@ export class ToDoService {
         this.toDos.splice(i,1);
       }
     }
-    this.http.delete('http://localhost:666/api/todo/'+toDo.getId()).subscribe();
+    this.http.delete('http://bingusbongus.azurewebsite.net/api/todo/'+toDo.getId()).subscribe();
   }
 
 }
